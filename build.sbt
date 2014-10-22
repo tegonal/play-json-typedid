@@ -1,4 +1,4 @@
-name := "play-generic_id"
+name := "play-json-typedid"
 
 organization := "com.tegonal"
 
