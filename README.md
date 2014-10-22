@@ -29,11 +29,11 @@ Using typedid withing your case classes has a great adavantage when you provide 
 
 ## Installation
 
-Add the following to `project/plugins.sbt`:
+Add the following to `build.sbt`:
 
     resolvers += "Tegonal releases" at "https://github.com/tegonal/tegonal-mvn/raw/master/releases/"
 
-    addSbtPlugin("com.tegonal" % "play-json-typedid" % "1.0.0")
+    libraryDependencies += "com.tegonal" %% "play-json-typedid" % "1.0.0"
 
 ## Usage
 
