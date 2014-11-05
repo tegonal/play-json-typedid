@@ -46,7 +46,7 @@ For every id class provide an appropriate format
 
     //provide formats for id classes
     implicit val testId1Format: Format[TestId1] = Json.idformat[TestId1](TestId1.apply _)
-    implicit val testId2Format: Format[TestId2] = Json.idformat[TestId2](TestId2.apply _)
+  implicit val testId2Format: Format[TestId2] = Json.idformat[TestId2](TestId2.apply _)
 
 After this, id classes can be used within automatically mapped case classes as described in `https://www.playframework.com/documentation/2.3.x/ScalaJsonCombinators`
 

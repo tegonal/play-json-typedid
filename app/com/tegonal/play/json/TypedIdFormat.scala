@@ -26,16 +26,25 @@ import play.api.libs.functional.syntax._
 import play.api.libs.json.Format
 
 object TypedId {
+
+  //implicit convertion to extended json object
+  implicit def fromJson(json: Json.type) = TypedId
+
+  //extended format function
+  def idformat[I <: StringBaseId](fact: Factory[String, I]) = new StringTypedIdFormat[I](fact)
+  def idformat[I <: NumberBaseId](fact: Factory[BigDecimal, I]) = new NumberTypedIdFormat[I](fact)
+
   trait BaseId[V] {
     val value: V
   }
   //Try to read any write generic id objects from json
   type Factory[V, I <: BaseId[V]] = V => I
 
-  trait StringBaseId extends BaseId[String] {
-  }
-  trait NumberBaseId extends BaseId[BigDecimal] {
-  }
+  trait StringBaseId extends BaseId[String]
+  trait NumberBaseId extends BaseId[BigDecimal]
+
+  case class StringId[T](value: String) extends BaseId[String]
+  case class NumberId[T](value: BigDecimal) extends BaseId[BigDecimal]
 
   implicit class StringTypedIdFormat[I <: BaseId[String]](fact: Factory[String, I]) extends Format[I] {
     def reads(json: JsValue): JsResult[I] = json match {
@@ -53,4 +62,8 @@ object TypedId {
 
     def writes(id: I): JsValue = JsNumber(id.value)
   }
+
+  //provide formats for id classes
+  implicit def stringIdFormat[T]: Format[StringId[T]] = new StringTypedIdFormat[StringId[T]](StringId.apply _)
+  implicit def numberIdFormat[T]: Format[NumberId[T]] = new NumberTypedIdFormat[NumberId[T]](NumberId.apply _)
 }
