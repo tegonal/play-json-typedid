@@ -33,7 +33,7 @@ Add the following to `build.sbt`:
 
     resolvers += "Tegonal releases" at "https://github.com/tegonal/tegonal-mvn/raw/master/releases/"
 
-    libraryDependencies += "com.tegonal" %% "play-json-typedid" % "1.0.0"
+    libraryDependencies += "com.tegonal" %% "play-json-typedid" % "1.0.1"
 
 ## Usage
 

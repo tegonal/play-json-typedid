@@ -35,21 +35,28 @@ object TypedIdFormatSpec extends PlaySpecification {
   case class TestId2(value: BigDecimal) extends NumberBaseId
 
   //provide formats for id classes
-  implicit val testId1Format: Format[TestId1] = Json.idformat[TestId1](TestId1.apply _)
-  implicit val testId2Format: Format[TestId2] = Json.idformat[TestId2](TestId2.apply _)
+  object TestId1 {
+    implicit val testId1Format: Format[TestId1] = Json.idformat[TestId1](TestId1.apply _)
+  }
+  object TestId2 {
+    implicit val testId2Format: Format[TestId2] = Json.idformat[TestId2](TestId2.apply _)
+  }
 
   case class Test1(id: TestId1)
   case class Test2(id: TestId2)
   case class Test3(id: TestId1, foreigId: TestId2)
 
-  case class Test4(id: StringId[Test4])
-  case class Test5(id: NumberId[Test5])
-  case class Test6(id: StringId[Test6], foreigKey: NumberId[Test5])
+  //provide formats for container classes in companion objects
+  object Test1 {
+    implicit val test1Format: Format[Test1] = Json.format[Test1]
+  }
 
-  //provide formats for container classes
-  implicit val test1Format: Format[Test1] = Json.format[Test1]
-  implicit val test2Format: Format[Test2] = Json.format[Test2]
-  implicit val test3Format: Format[Test3] = Json.format[Test3]
+  object Test2 {
+    implicit val test2Format: Format[Test2] = Json.format[Test2]
+  }
+  object Test3 {
+    implicit val test3Format: Format[Test3] = Json.format[Test3]
+  }
 
   //test data
   val test1: JsValue = Json.parse("""

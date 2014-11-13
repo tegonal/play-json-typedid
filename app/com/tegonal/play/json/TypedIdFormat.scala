@@ -1,4 +1,4 @@
-/* __ __ *\
+/* ____ *\
 * / /____ ___ ____ ___ ___ _/ / generic-id *
 * / __/ -_) _ `/ _ \/ _ \/ _ `/ / contributed by tegonal *
 * \__/\__/\_, /\___/_//_/\_,_/_/ http://tegonal.com/ *
@@ -31,8 +31,8 @@ object TypedId {
   implicit def fromJson(json: Json.type) = TypedId
 
   //extended format function
-  def idformat[I <: StringBaseId](fact: Factory[String, I]) = new StringTypedIdFormat[I](fact)
-  def idformat[I <: NumberBaseId](fact: Factory[BigDecimal, I]) = new NumberTypedIdFormat[I](fact)
+  def idformat[I <: StringBaseId](implicit fact: Factory[String, I]) = new StringTypedIdFormat[I]
+  def idformat[I <: NumberBaseId](implicit fact: Factory[BigDecimal, I]) = new NumberTypedIdFormat[I]
 
   trait BaseId[V] {
     val value: V
@@ -46,15 +46,16 @@ object TypedId {
   case class StringId[T](value: String) extends BaseId[String]
   case class NumberId[T](value: BigDecimal) extends BaseId[BigDecimal]
 
-  implicit class StringTypedIdFormat[I <: BaseId[String]](fact: Factory[String, I]) extends Format[I] {
+  class StringTypedIdFormat[I <: BaseId[String]](implicit fact: Factory[String, I]) extends Format[I] {
     def reads(json: JsValue): JsResult[I] = json match {
+
       case JsString(value) => JsSuccess(fact(value))
       case _ => JsError(s"Unexpected JSON value $json")
     }
 
     def writes(id: I): JsValue = JsString(id.value)
   }
-  implicit class NumberTypedIdFormat[I <: BaseId[BigDecimal]](fact: Factory[BigDecimal, I]) extends Format[I] {
+  class NumberTypedIdFormat[I <: BaseId[BigDecimal]](implicit fact: Factory[BigDecimal, I]) extends Format[I] {
     def reads(json: JsValue): JsResult[I] = json match {
       case JsNumber(value) => JsSuccess(fact(value))
       case _ => JsError(s"Unexpected JSON value $json")
@@ -62,8 +63,4 @@ object TypedId {
 
     def writes(id: I): JsValue = JsNumber(id.value)
   }
-
-  //provide formats for id classes
-  implicit def stringIdFormat[T]: Format[StringId[T]] = new StringTypedIdFormat[StringId[T]](StringId.apply _)
-  implicit def numberIdFormat[T]: Format[NumberId[T]] = new NumberTypedIdFormat[NumberId[T]](NumberId.apply _)
 }
