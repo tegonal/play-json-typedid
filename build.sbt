@@ -2,9 +2,9 @@ name := "play-json-typedid"
 
 organization := "com.tegonal"
 
-version := "1.0.1"
+version := "1.0.2"
 
-scalaVersion := "2.11.1"
+scalaVersion := "2.12.8"
 
 lazy val root = (project in file(".")).enablePlugins(PlayScala)
 
@@ -13,7 +13,7 @@ resolvers += "Typesafe Repository" at "http://repo.typesafe.com/typesafe/release
 resolvers += "Sonatype Snapshots" at "https://oss.sonatype.org/content/repositories/snapshots/"
 
 libraryDependencies ++= Seq(
-  "org.scalatestplus" %% "play" % "1.1.0" % "test"
+  "org.scalatestplus.play" %% "scalatestplus-play" % "4.0.3" % "test"
 )
 
 resolvers ++= Seq(

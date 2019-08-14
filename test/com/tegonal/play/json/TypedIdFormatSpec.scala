@@ -20,16 +20,11 @@
 \* */
 package com.tegonal.play.genericid
 
-import play.api.mvc._
-import play.api.test._
-import play.api.test.Helpers._
-import play.api.libs.json._
-import play.api.libs.json.Reads._
-import play.api.libs.functional.syntax._
-import com.tegonal.play.json._
 import com.tegonal.play.json.TypedId._
+import org.scalatestplus.play.PlaySpec
+import play.api.libs.json._
 
-object TypedIdFormatSpec extends PlaySpecification {
+object TypedIdFormatSpec extends PlaySpec {
   //Provide some helper classes
   case class TestId1(value: String) extends StringBaseId
   case class TestId2(value: BigDecimal) extends NumberBaseId
