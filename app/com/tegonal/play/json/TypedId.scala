@@ -39,8 +39,9 @@ object TypedId {
   trait BaseId[V] {
     val value: V
   }
+
   // Try to read any write generic id objects from json
-  private type Factory[V, I <: BaseId[V]] = V => I
+  type Factory[V, I <: BaseId[V]] = V => I
 
   trait StringBaseId extends BaseId[String]
   trait NumberBaseId extends BaseId[BigDecimal]
