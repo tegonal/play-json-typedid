@@ -1,4 +1,4 @@
-# play-json-typedid - TypedId Json Format for Play 2 Scala
+# play-json-typedid - TypedId Json Format for Play Framework Scala
 
 ## About
 
@@ -33,7 +33,7 @@ Add the following to `build.sbt`:
 
     resolvers += "Tegonal releases" at "https://github.com/tegonal/tegonal-mvn/raw/master/releases/"
 
-    libraryDependencies += "com.tegonal" %% "play-json-typedid" % "1.0.3"
+    libraryDependencies += "com.tegonal" %% "play-json-typedid" % "1.0.4"
 
 ## Usage
 
