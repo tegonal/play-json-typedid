@@ -14,7 +14,7 @@ resolvers += "Typesafe Repository" at "https://repo.typesafe.com/typesafe/releas
 resolvers += "Sonatype Snapshots" at "https://oss.sonatype.org/content/repositories/snapshots/"
 
 libraryDependencies ++= Seq(
-  "org.scalatestplus.play" %% "scalatestplus-play" % "7.0.1" % "test"
+  "org.scalatestplus.play" %% "scalatestplus-play" % "7.0.2" % "test"
 )
 
 resolvers ++= Seq(
