@@ -3,9 +3,11 @@ name := "play-json-typedid"
 
 organization := "com.tegonal"
 
-version := "2.0.0"
+version := "2.0.1"
 
-scalaVersion := "2.13.16"
+scalaVersion := "3.3.6"
+
+crossScalaVersions := Seq("3.3.6", "2.13.18")
 
 lazy val root = (project in file(".")).enablePlugins(PlayScala)
 
