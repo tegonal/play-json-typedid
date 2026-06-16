@@ -27,10 +27,10 @@ import scala.language.implicitConversions
 
 object TypedId {
 
-  // implicit convertion to extended json object
+  // implicit conversion to extended json object
   implicit def fromJson(@unused json: Json.type): TypedId.type = TypedId
 
-  // extended format function
+  // extended format functions
   def idformat[I <: StringBaseId](implicit fact: Factory[String, I]) =
     new StringTypedIdFormat[I]
   def idformat[I <: NumberBaseId](implicit fact: Factory[BigDecimal, I]) =

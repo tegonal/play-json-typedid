@@ -32,11 +32,11 @@ class TypedIdFormatSpec extends PlaySpec {
   // provide formats for id classes
   object TestId1 {
     implicit val testId1Format: Format[TestId1] =
-      Json.idformat[TestId1](TestId1.apply _)
+      Json.idformat[TestId1](TestId1.apply)
   }
   object TestId2 {
     implicit val testId2Format: Format[TestId2] =
-      Json.idformat[TestId2](TestId2.apply _)
+      Json.idformat[TestId2](TestId2.apply)
   }
 
   case class Test1(id: TestId1)

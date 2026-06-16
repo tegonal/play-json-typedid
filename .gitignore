@@ -22,3 +22,7 @@ project/plugins/project/
 .project
 .settings/
 .idea
+
+.bsp/
+.metals/
+.vscode/
