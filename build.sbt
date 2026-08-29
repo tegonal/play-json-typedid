@@ -5,7 +5,7 @@ organization := "com.tegonal"
 
 version := "2.0.0"
 
-scalaVersion := "2.13.16"
+scalaVersion := "3.9.0"
 
 lazy val root = (project in file(".")).enablePlugins(PlayScala)
 
